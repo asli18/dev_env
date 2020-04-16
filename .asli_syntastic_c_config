@@ -1,0 +1,11 @@
+-Iinc/
+-Iinc/hal
+-Iinc/bsp
+-Iinc/common
+-Iinc/proj/auo
+-Iinc/proj/csot
+-Iinc/proj/inx
+-Iinc/proj/test_case
+
+-Isrc/bsp/
+-Isrc/bsp/ae250
