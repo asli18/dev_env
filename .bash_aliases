@@ -43,7 +43,7 @@ alias g.curl='git config --get remote.origin.url'
 
 git_config() {
     git config --global user.name "asli18"
-    git config --global user.email "https://asli18@github.com"
+    git config --global user.email "63712526+asli18@users.noreply.github.com"
     git config -l
 }
 
