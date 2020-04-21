@@ -37,7 +37,15 @@ alias g.rslast='git reset HEAD~1' # Undoing the Last Commit
 alias g.s='git status'
 alias g.co='git checkout'
 alias g.f='git fetch'
+
 alias g.url='git remote -v'
+alias g.curl='git config --get remote.origin.url'
+
+git_config() {
+    git config --global user.name "asli18"
+    git config --global user.email "https://github.com/asli18"
+    git config -l
+}
 
 # gitk - The Git repository browser
 alias g.k='gitk'
