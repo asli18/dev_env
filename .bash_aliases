@@ -20,6 +20,16 @@ alias ll='ls -al'
 alias minicom='minicom -w' # line-wrap
 alias retab='expand -t 4 ${1}' # convert tabs to 4 spaces
 
+alias hdc='hexdump -C'
+# hexdump display as hexedit style
+hds() {
+    if [ $# -eq 1 ]; then
+        hexdump -v  -e '"%08.8_ax  "' -e' 4/1 "%02x " "  " 4/1 "%02x " "  "  4/1 "%02x " "  " 4/1 "%02x "  ' -e '" |" 16/1 "%_p" "|\n"' ${1}
+    else
+        echo "invalid input"
+    fi
+}
+
 ### === git ===
 alias g.a='git add'
 alias g.c='git commit'
@@ -44,7 +54,8 @@ alias g.curl='git config --get remote.origin.url'
 git_config() {
     git config --global user.name "asli18"
     git config --global user.email "63712526+asli18@users.noreply.github.com"
-    git config -l
+    git config -l --show-origin
+    git config -l --show-scope
 }
 
 # gitk - The Git repository browser
@@ -285,7 +296,14 @@ math() {
 # The bc must use upper case letters for hex
 # (Note: They must be capitals. Lower case letters are variable names.)
 math16() {
-    echo "scale=0; obase=10; ibase=16; ${1}" | bc -l
+
+    res=$(echo "scale=0; obase=10; ibase=16; ${1}" | bc -l)
+
+    if [ -z $res ]; then
+        echo "bc only support UPPER CASE hex digits"
+        return 1
+    fi
+
     echo -ne "0x"
     echo "scale=0; obase=16; ibase=16; ${1}" | bc -l
 }
