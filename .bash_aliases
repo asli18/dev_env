@@ -74,7 +74,19 @@ alias g.lgnsf='g.lg --name-status FETCH_HEAD'
 alias g.lgs='g.lg --stat'
 alias g.lgp='g.lg --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s \
                                   %Cgreen(%cr) %C(bold blue)<%an>%Creset" \
-                 --abbrev-commit'
+                  --abbrev-commit'
+
+alias g.lnh='git log --name-status HEAD^..HEAD'
+alias g.sum='git show --summary'
+
+# generate a git diff file of the latast commit
+git_gen_diff() {
+    local head_sha_id=$(git show --summary | head -1 | awk '{ print substr($2, 1, 7) }')
+    local file_path=$(pwd ${head_sha_id})
+
+    echo -e "generate ${YELLOW}${file_path}/${BOLD}${LRED}${head_sha_id}.diff${NC}"
+    g.d > "${head_sha_id}.diff"
+}
 
 # rename git branch locally and remotely
 git_branch_rename() {
@@ -255,8 +267,14 @@ reload_bash() {
     source ~/.bashrc
     source ~/.bash_aliases
 }
-
+# display the attributes and value of each NAME
 # print out just the body of the function
+# -- string
+# -i integer
+# -a arrays
+# -A map(associative arrays)
+alias var.attr='declare -p ${1}'
+
 typec() {
     if [ $# -eq 1 ]; then
         type ${1} | sed '1,3d;$d'
@@ -296,10 +314,9 @@ math() {
 # The bc must use upper case letters for hex
 # (Note: They must be capitals. Lower case letters are variable names.)
 math16() {
+    local res=$(echo "scale=0; obase=10; ibase=16; ${1}" | bc -l)
 
-    res=$(echo "scale=0; obase=10; ibase=16; ${1}" | bc -l)
-
-    if [ -z $res ]; then
+    if [ -z ${res} ]; then
         echo "bc only support UPPER CASE hex digits"
         return 1
     fi
@@ -382,18 +399,19 @@ line_count() {
 }
 
 line_count2() {
+    # declare inside a function automatically makes the variable local.
     declare -i sum=0
 
     if [ $# -eq 0 ]; then
         while IFS=  read -r -d $'\0'; do
-            lines=$(wc -l ${REPLY} | cut -f1 -d' ')
+            local lines=$(wc -l ${REPLY} | cut -f1 -d' ')
             sum=$((lines + sum))
             printf "%10d %s\n" "${lines}" "${REPLY}"
         done < <(find_src)
 
     elif [ $# -eq 1 ] && [ ${1} == "all" ]; then
         while IFS=  read -r -d $'\0'; do
-            lines=$(wc -l ${REPLY} | cut -f1 -d' ')
+            local lines=$(wc -l ${REPLY} | cut -f1 -d' ')
             sum=$((lines + sum))
             printf "%10d %s\n" "${lines}" "${REPLY}"
         done < <(find_all)
@@ -402,7 +420,6 @@ line_count2() {
     fi
 
     printf "total line: $sum\r\n"
-    unset sum lines
 }
 
 file_count() {
@@ -425,24 +442,84 @@ run_astyle() {
 }
 
 ### ================================================================================
+# Colors and formatting
+alias echo_color='
+        echo -e ${RED}      "RED     " ${LRED}      "LRED     " ${BOLD} "LRED"     ${NC}
+        echo -e ${GREEN}    "GREEN   " ${LGREEN}    "LGREEN   " ${BOLD} "LGREEN"   ${NC}
+        echo -e ${YELLOW}   "YELLOW  " ${LYELLOW}   "LYELLOW  " ${BOLD} "LYELLOW"  ${NC}
+        echo -e ${BLUE}     "BLUE    " ${LBLUE}     "LBLUE    " ${BOLD} "LBLUE"    ${NC}
+        echo -e ${PURPLE}   "PURPLE  " ${LPURPLE}   "LPURPLE  " ${BOLD} "LPURPLE"  ${NC}
+        echo -e ${CYAN}     "CYAN    " ${LCYAN}     "LCYAN    " ${BOLD} "LCYAN"    ${NC}
+        echo -e ${BLACK}    "BLACK   " ${WHITE}     "WHIT     " ${BOLD} "WHITE"    ${NC}
+        echo -e ${DRAKGRAY} "DRAKGRAY" ${LIGHTGRAY} "LIGHTGRAY" ${BOLD} "LIGHTGRAY"${NC}'
 
-# output color of echo
-NC='\033[0m'
+<<com
+  Escape character (often represented by "^[" or "<Esc>")
+  followed by some other characters: "<Esc>[FORMATCODEm".
+  <Esc>: \e, \033, \x18
 
-RED='\033[00;31m'
-GREEN='\033[00;32m'
-YELLOW='\033[00;33m'
-BLUE='\033[00;34m'
-PURPLE='\033[00;35m'
-CYAN='\033[00;36m'
-LIGHTGRAY='\033[00;37m'
+  multiple attribute example:
+    echo -e "\e[1;39mSTRING${NC}"
+    echo -e "${BOLD}${RED}STRING${NC}"
+com
 
-LRED='\033[01;31m'
-LGREEN='\033[01;32m'
-LYELLOW='\033[01;33m'
-LBLUE='\033[01;34m'
-LPURPLE='\033[01;35m'
-LCYAN='\033[01;36m'
-WHITE='\033[01;37m'
+# Reset all attributes
+NC='\e[0m'
 
+# Formatting
+BOLD='\e[1m' # Bold/Bright
+DIM='\e[2m'
+UNDERLINE='\e[4m'
+BLINK='\e[5m'
+REVERSE='\e[7m' # invert the foreground and background colors
+HIDDEN='\e[8m' # useful for passwords
+# Reset
+RBOLD='\e[21m'
+RDIM='\e[22m'
+RUNDERLINE='\e[24m'
+RBLINK='\e[25m'
+RREVERSE='\e[27m'
+RHIDDEN='\e[28m'
+
+# === 8/16 Colors ===
+
+# Foreground (text)
+DEF='\e[39m'
+BLACK='\e[30m'
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+BLUE='\e[34m'
+PURPLE='\e[35m' # Magenta
+CYAN='\e[36m'
+LIGHTGRAY='\e[37m'
+
+DRAKGRAY='\e[90m'
+LRED='\e[91m'
+LGREEN='\e[92m'
+LYELLOW='\e[93m'
+LBLUE='\e[94m'
+LPURPLE='\e[95m'
+LCYAN='\e[96m'
+WHITE='\e[97m'
+
+# Background
+BG_DEF='\e[49m'
+BG_BLACK='\e[40m'
+BG_RED='\e[41m'
+BG_GREEN='\e[42m'
+BG_YELLOW='\e[43m'
+BG_BLUE='\e[44m'
+BG_PURPLE='\e[45m' # Magenta
+BG_CYAN='\e[46m'
+BG_LIGHTGRAY='\e[47m'
+
+BG_DRAKGRAY='\e[100m'
+BG_LRED='\e[101m'
+BG_LGREEN='\e[102m'
+BG_LYELLOW='\e[103m'
+BG_LBLUE='\e[104m'
+BG_LPURPLE='\e[105m'
+BG_LCYAN='\e[106m'
+BG_WHITE='\e[107m'
 
