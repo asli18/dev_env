@@ -19,17 +19,47 @@ alias lsl='ls -l'
 alias ll='ls -al'
 alias minicom='minicom -w' # line-wrap
 alias retab='expand -t 4 ${1}' # convert tabs to 4 spaces
+alias cpu_order='lscpu | grep Endian'
 
 alias hdc='hexdump -C'
+# print only the hex values from hexdump without line numbers or ASCII table
+hdn() {
+    hexdump -e '16/1 "%02x " "\n"' ${1}
+}
+
 # hexdump display as hexedit style
 hds() {
     if [ $# -eq 1 ]; then
-        hexdump -v  -e '"%08.8_ax  "' -e' 4/1 "%02x " "  " 4/1 "%02x " "  "  4/1 "%02x " "  " 4/1 "%02x "  ' -e '" |" 16/1 "%_p" "|\n"' ${1}
+        hexdump -v -e '"%08.8_ax  "' -e' 4/1 "%02x " "  " 4/1 "%02x " "  "  4/1 "%02x " "  " 4/1 "%02x "  ' -e '" |" 16/1 "%_p" "|\n"' ${1}
     else
         echo "invalid input"
     fi
 }
 
+# create a hex dump of file containing only the hex characters without spaces
+print_hex() {
+    if [ $# -eq 1 ]; then
+        xxd -ps ${1} | tr -d '\n' # all on a single line
+
+    elif [ $# -eq 2 ]; then
+        if [ "${1}" == "-r" ]; then
+            # To reverse the process: xxd -r -ps hex_file
+            # (it is ok with or without newlines)
+            xxd -r -ps ${2}
+        else
+            echo "invalid input"
+        fi
+    else
+        echo "invalid input"
+    fi
+
+}
+
+# SHA
+# shasum -a 256 -b ${1}
+# sha256sum -b --tag ${1}
+
+### ================================================================================
 ### === git ===
 alias g.a='git add'
 alias g.c='git commit'
@@ -79,7 +109,7 @@ alias g.lgp='g.lg --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s \
 alias g.lnh='git log --name-status HEAD^..HEAD'
 alias g.sum='git show --summary'
 
-# generate a git diff file of the latast commit
+# generate a git diff file of the latast commit and name it by commit ID.
 git_gen_diff() {
     local head_sha_id=$(git show --summary | head -1 | awk '{ print substr($2, 1, 7) }')
     local file_path=$(pwd ${head_sha_id})
@@ -145,14 +175,10 @@ alias mkm='make menuconfig'
 
 alias ice1='monice -d ice1:e -v4kec'
 alias ice2='monice -d ice2:e -v4kec'
-alias mdi1='mdi-server -n 42 -d 0'
-alias mdi2='mdi-server -n 42 -d 1'
 alias relfgdb='rlwrap -a -r -pyellow mips-elf-gdb'
 alias rice1='rlwrap -a -r -pyellow monice -d ice1:e -v4kec'
 alias rice2='rlwrap -a -r -pyellow monice -d ice2:e -v4kec'
 alias sq3='rlwrap -a -r -pyellow -z pipeto sqlite3'
-alias uva='node ~/work/uva-node'
-alias webshare='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
 ### ================================================================================
 
 ### === Process operations ===
@@ -164,6 +190,7 @@ alias pg='pgrep -f ${1}'
 alias pgl='pgrep -f -l ${1}' # -l print PID and process name
 alias fpid='top -b -n 1 | grep ${1}' # ${1}: process name
 alias fpid_num='top -b -n 1 | grep -c ${1}' # print counting number of basic pattern matches
+
 alias psg='ps ax | grep ${1}' # ${1}: process name
 
 alias kl='kill -9 ${1}' # ${1}: PID
@@ -267,6 +294,7 @@ reload_bash() {
     source ~/.bashrc
     source ~/.bash_aliases
 }
+
 # display the attributes and value of each NAME
 # print out just the body of the function
 # -- string
@@ -510,7 +538,7 @@ BG_RED='\e[41m'
 BG_GREEN='\e[42m'
 BG_YELLOW='\e[43m'
 BG_BLUE='\e[44m'
-BG_PURPLE='\e[45m' # Magenta
+BG_PURPLE='\e[45m'
 BG_CYAN='\e[46m'
 BG_LIGHTGRAY='\e[47m'
 
@@ -522,4 +550,5 @@ BG_LBLUE='\e[104m'
 BG_LPURPLE='\e[105m'
 BG_LCYAN='\e[106m'
 BG_WHITE='\e[107m'
+### ================================================================================
 
