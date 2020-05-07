@@ -212,7 +212,8 @@ alias fsp='find . -type f \( -name "*.sh" -o -name "*.py" \)'
 
 # rg, -S smart case, -H display file path
 #     -C context <NUM> Show NUM lines before and after each match.
-alias rg='rg -H -C 0 --no-heading'
+alias rg='rg -H --no-heading'
+alias rgn='rg -H -C ${1} --no-heading ${2}'
 alias rgs='rg -S -H --no-heading ${1}'
 
 alias rgc='rg -t c -H --no-heading ${1}'
