@@ -63,10 +63,10 @@ print_hex() {
 ### === git ===
 alias g.a='git add'
 alias g.c='git commit'
-alias g.p='git pull'
+alias g.p='git pull --rebase'
 alias g.pr='git pull --rebase'
-alias g.d='git diff --no-ext-diff' # Disallow external diff drivers.
-alias g.xd='git diff --ext-diff' # Allow an external diff drivers.
+alias g.d='git diff --no-ext-diff --binary' # Disallow external diff drivers.
+alias g.xd='git diff --ext-diff --binary' # Allow an external diff drivers.
 alias g.meld='git difftool -t meld'
 alias g.b='git branch -v'
 alias g.bd='git branch -d' # delete branch locally
@@ -113,9 +113,31 @@ alias g.sum='git show --summary'
 git_gen_diff() {
     local head_sha_id=$(git show --summary | head -1 | awk '{ print substr($2, 1, 7) }')
     local file_path=$(pwd ${head_sha_id})
+    local git_dir_top=$(echo $(git rev-parse --show-toplevel) | sed 's|.*/||')
+    local file_name="${git_dir_top}_${head_sha_id}.diff"
 
-    echo -e "generate ${YELLOW}${file_path}/${BOLD}${LRED}${head_sha_id}.diff${NC}"
-    g.d > "${head_sha_id}.diff"
+    if [ -f "${file_name}" ]; then
+        echo -e "File ${LRED}${file_name}${NC} exists, abort generate process"
+        return 1
+    fi
+
+    echo -e "Generate ${YELLOW}${file_path}/${BOLD}${LRED}${file_name}${NC}"
+    g.d > "${file_name}"
+}
+
+# git apply patch flow
+git_ap() {
+    git apply --stat ${1}
+    if [ $? -ne 0 ]; then
+        return 1;
+    fi
+
+    git apply --check ${1}
+    if [ $? -ne 0 ]; then
+        return 1;
+    fi
+    # am is better than apply
+    git am ${1}
 }
 
 # rename git branch locally and remotely
