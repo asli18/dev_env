@@ -109,7 +109,7 @@ alias g.lgp='g.lg --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s \
 alias g.lnh='git log --name-status HEAD^..HEAD'
 alias g.sum='git show --summary'
 
-# generate a git diff file of the latast commit and name it by commit ID.
+# generate a git diff file of the latast commit and use commit ID as file name.
 git_gen_diff() {
     local head_sha_id=$(git show --summary | head -1 | awk '{ print substr($2, 1, 7) }')
     local file_path=$(pwd ${head_sha_id})

@@ -19,6 +19,6 @@
  * batch
    * Jigbox
      * Jigbox initial flow
- * c
+ * C
    * checkCPU.c
      * Check CPU Endianness(Byte Order)

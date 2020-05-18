@@ -1,18 +1,25 @@
 #!/bin/bash
 
 << README
-Load FW to device via Xmodem
+Load Image file to device via Xmodem
 
 $ sudo kermit; Ctrl-\
-$ source load_fw.sh
+$ source load_img.sh <image_path> <dev>
 README
 
 if [ $# -eq 2 ]; then
-    dev=${1}
-    img=${2}
+    img=${1}
+    dev=${2}
+
+    if [ ! -e ${dev} ]; then
+        echo -e "${CYAN}${dev}${NC} does not exist"
+        return 1
+    fi
+
     echo -e "Xmodem send ${GREEN}${img}${NC} to ${CYAN}${dev}${NC}"
 else
-    echo -e "Invalid input"
+    echo -e "Invalid input, source load_img.sh <image_path> <dev>"
+    return 1
 fi
 
 sudo chmod o+rw ${dev}
