@@ -20,6 +20,7 @@ alias ll='ls -al'
 alias minicom='minicom -w' # line-wrap
 alias retab='expand -t 4 ${1}' # convert tabs to 4 spaces
 alias cpu_order='lscpu | grep Endian'
+alias tree_a='tree -I ".git*|.svn" -a'
 
 alias hdc='hexdump -C'
 # print only the hex values from hexdump without line numbers or ASCII table
