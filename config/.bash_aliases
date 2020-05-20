@@ -20,7 +20,11 @@ alias ll='ls -al'
 alias minicom='minicom -w' # line-wrap
 alias retab='expand -t 4 ${1}' # convert tabs to 4 spaces
 alias cpu_order='lscpu | grep Endian'
-alias tree_a='tree -I ".git*|.svn" -a'
+
+# list all files exclude ...
+alias tree_a='tree -I ".git*|.svn|Debug|*.o|*.d" -a'
+# list only source and header files
+alias tree_s='tree -P "*.c|*.h"'
 
 alias hdc='hexdump -C'
 # print only the hex values from hexdump without line numbers or ASCII table
@@ -67,6 +71,7 @@ alias g.c='git commit'
 alias g.p='git pull --rebase'
 alias g.pr='git pull --rebase'
 alias g.d='git diff --no-ext-diff --binary' # Disallow external diff drivers.
+alias g.ds='g.d --staged' # show changes that have been staged(--staged is a synonym for --cached)
 alias g.xd='git diff --ext-diff --binary' # Allow an external diff drivers.
 alias g.meld='git difftool -t meld'
 alias g.b='git branch -v'
@@ -195,6 +200,12 @@ alias mkcl='make clean'
 alias mkcla='make clean all'
 alias mkd='make distclean'
 alias mkm='make menuconfig'
+
+cleanup() {
+    find . -name "Debug" | xargs rm -rf;
+    find . -name "output" | xargs rm -rf;
+    find . -type f \( -name "*.o" -o -name "*.d" \) | xargs rm -rf;
+}
 
 alias ice1='monice -d ice1:e -v4kec'
 alias ice2='monice -d ice2:e -v4kec'
