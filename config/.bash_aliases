@@ -25,6 +25,8 @@ alias cpu_order='lscpu | grep Endian'
 alias tree_a='tree -I ".git*|.svn|Debug|*.o|*.d" -a'
 # list only source and header files
 alias tree_s='tree -P "*.c|*.h"'
+# export the output in HTML format
+alias tree_to_html='tree_a -L 3 -H ./  > tree.html; firefox tree.html'
 
 alias hdc='hexdump -C'
 # print only the hex values from hexdump without line numbers or ASCII table
