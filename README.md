@@ -12,17 +12,18 @@
  * **bash**
    * ***astyle-clean.sh***
      * Copy or move Artistic Style backup files to a backup directory.
-   * ***load_img.sh***
-     * Load image via xmodem
    * ***colors_and_formatting.sh***
      * Linux terminal Colors and formatting (16 colors)
      * It displays a lot of possible combination of the attributes \
        (but not all, because it uses only one formatting attribute at a time).
+   * ***load_img.sh***
+     * Load image via xmodem
    * ***ls_usb_dev.sh***
      * List the dev path for each device.
  * **batch**
    * ***Jigbox***
-     * jigbox initial flow
+     * jigbox initial flow.md
+     * jigbox initial flow.pdf
      * jigbox_install.bat
  * **C**
    * ***checkCPU.c***
