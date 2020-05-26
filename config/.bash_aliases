@@ -14,7 +14,7 @@ com
 alias c='cd'
 alias ex='exit'
 alias fdiff='find ./ -maxdepth 1 -type f -name \*.diff'
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --group-directories-first'
 alias lsl='ls -l'
 alias ll='ls -al'
 alias minicom='minicom -w' # line-wrap
@@ -26,7 +26,9 @@ alias tree_a='tree -I ".git*|.svn|Debug|*.o|*.d" -a'
 # list only source and header files
 alias tree_s='tree -P "*.c|*.h"'
 # export the output in HTML format
-alias tree_to_html='tree_a -L 3 -H ./  > tree.html; firefox tree.html'
+alias tree_to_html='tree -I ".git*|.svn|Debug|*.o|*.d|tree.*" -a -H ./ --dirsfirst -s -h > tree.html; firefox tree.html &'
+# export the output in ASCII format
+alias tree_to_ascii='tree -I ".git*|.svn|Debug|*.o|*.d|tree.*" -a --charset=ascii --dirsfirst -s -h > tree.ascii'
 
 alias hdc='hexdump -C'
 # print only the hex values from hexdump without line numbers or ASCII table

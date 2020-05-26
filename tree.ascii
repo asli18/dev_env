@@ -1,0 +1,36 @@
+.
+|-- [4.0K]  config
+|   |-- [4.0K]  .vim
+|   |   |-- [4.0K]  autoload
+|   |   |   |-- [ 77K]  plug.vim
+|   |   |   `-- [ 75K]  plug.vim.old
+|   |   |-- [4.0K]  colors
+|   |   |   `-- [2.3K]  256-jungle.vim
+|   |   `-- [4.0K]  plugged
+|   |       `-- [4.0K]  c-syntax.vim
+|   |           `-- [4.0K]  after
+|   |               `-- [4.0K]  syntax
+|   |                   `-- [ 12K]  c.vim
+|   |-- [ 135]  .asli_syntastic_c_config
+|   |-- [ 18K]  .bash_aliases
+|   |-- [  30]  gitignore
+|   |-- [ 297]  .kermrc
+|   |-- [1.2K]  .screenrc
+|   |-- [7.3M]  vim_bk.7z
+|   `-- [ 12K]  .vimrc
+|-- [4.0K]  script
+|   |-- [4.0K]  bash
+|   |   |-- [2.6K]  astyle-clean.sh
+|   |   |-- [ 672]  colors_and_formatting.sh
+|   |   |-- [ 817]  load_img.sh
+|   |   `-- [1.2K]  ls_usb_dev.sh
+|   |-- [4.0K]  batch
+|   |   `-- [4.0K]  jigbox
+|   |       |-- [ 361]  jigbox initial flow.md
+|   |       |-- [ 21K]  jigbox initial flow.pdf
+|   |       `-- [ 519]  jigbox_install.bat
+|   `-- [4.0K]  C
+|       `-- [ 579]  checkCPU.c
+`-- [ 802]  README.md
+
+13 directories, 20 files
