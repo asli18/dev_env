@@ -64,10 +64,29 @@ print_hex() {
 
 }
 
+### ================================================================================
 # SHA
 # shasum -a 256 -b ${1}
 # sha256sum -b --tag ${1}
 
+### === OpenSSL example ===
+<<com
+openssl rsautl -help
+
+# Generate a 2048 bit RSA Key
+openssl genrsa -out rsa.private
+# Export the RSA Public Key to a File
+openssl rsa -in rsa.private -out rsa.public -pubout -outform PEM
+
+# Encrypt with public key and decrypt with private key
+openssl rsautl -encrypt -inkey rsa.public -pubin -in foo -out foo.encrypt
+openssl rsautl -decrypt -inkey rsa.private -in foo.encrypt -out foo.decrypt
+
+# Encrypt with private key and decrypt with public key
+openssl rsautl -sign -inkey rsa.private -in foo -out foo.encrypt
+openssl rsautl -verify -inkey rsa.public -pubin -in foo.encrypt -out foo.decrypt
+
+com
 ### ================================================================================
 ### === git ===
 alias g.a='git add'
@@ -155,19 +174,20 @@ git_branch_rename() {
     if [ $# -ne 2 ]; then
         echo "Invalid input"
     else
-        # ${1} old_branch
-        # ${2} new_branch
-        echo -e "Change Branch Name ${GREEN}${1}${NC} to ${GREEN}${2}${NC}"
+        local old=${1}
+        local new=${2}
 
-        git branch -m ${1} ${2} # Rename branch locally
+        echo -e "Change Branch Name ${GREEN}${old}${NC} to ${GREEN}${new}${NC}"
+
+        git branch -m ${old} ${new} # Rename branch locally
 
         if [ $? -ne 0 ]; then
             return 1;
         fi
 
-        git push origin :${1}   # Delete the old branch
+        git push origin :${old} # Delete the old branch
         # Push the new branch, set local branch to track the new remote
-        git push --set-upstream origin ${2}
+        git push --set-upstream origin ${new}
     fi
 }
 
@@ -433,14 +453,14 @@ function rasp { cd ~/work/proj/sa_raspberry/kaleidoscope/; }
 
 sed_name() {
     if [ $# -eq 3 ]; then
-        echo -e "Change Name ${GREEN}${1}${NC} to ${GREEN}${2}${NC} dir: ${LYELLOW}${3}${NC}"
+        echo -e "Change Name ${GREEN}${1}${NC} to ${GREEN}${2}${NC} path: ${LYELLOW}${3}${NC}"
         sed -i "s/${1}/${2}/g" ${3}
     elif [ $# -eq 2 ]; then
         echo -e "Change Name ${GREEN}${1}${NC} to ${GREEN}${2}${NC}"
         #exclude svn-directories
         find . -name .svn -prune -o -type f -print0 | xargs -0 -n 1 sed -i -e "s/${1}/${2}/g"
     else
-        echo "Invalid input"
+        echo "Invalid input: sed_name {old} {new} ({file path})"
     fi
 }
 

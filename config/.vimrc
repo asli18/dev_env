@@ -102,7 +102,33 @@ let g:syntastic_check_on_wq = 1
 
 let g:syntastic_c_checkers = [ 'gcc', 'make' ]
 let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_c_compiler_options = ' -std=gnu11 -w '
+let g:syntastic_c_compiler_options = '-std=gnu11 -w'
+
+":echo g:syntastic_c_compiler_options
+":let g:syntastic_c_compiler_options = ' ... '
+
+if filereadable("inc/bsp/config.h")
+    let g:syntastic_c_compiler_options =
+            \'-include inc/bsp/config.h -std=gnu11 -w'
+            "'-include inc/bsp/config.h -std=gnu11 -W -Wall -Wextra -Wpedantic'
+endif
+
+"Show the content of function
+":function SynCfgCheck()
+" Execute function
+":call SynCfgCheck()
+
+function! SynCfgCheck()
+    if filereadable("inc/bsp/config.h")
+        echo "config.h exists"
+        let g:syntastic_c_compiler_options =
+                \'-include inc/bsp/config.h -std=gnu11 -w'
+    else
+        echo "config.h not exists"
+    endif
+endfunction
+
+
 let g:syntastic_c_no_default_include_dirs = 1
 let g:syntastic_c_no_include_search = 0
 let g:syntastic_c_check_header = 1
