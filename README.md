@@ -28,3 +28,6 @@
  * **C**
    * ***checkCPU.c***
      * Check CPU Endianness(Byte Order)
+ * **python**
+   * ***calc_log_elapsed_time.py***
+     * Calculate elapsed time of teraterm log file

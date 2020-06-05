@@ -23,14 +23,17 @@
 |   |   |-- [2.6K]  astyle-clean.sh
 |   |   |-- [ 672]  colors_and_formatting.sh
 |   |   |-- [ 817]  load_img.sh
-|   |   `-- [1.2K]  ls_usb_dev.sh
+|   |   |-- [1.2K]  ls_usb_dev.sh
+|   |   `-- [7.7K]  pishrink.sh
 |   |-- [4.0K]  batch
 |   |   `-- [4.0K]  jigbox
 |   |       |-- [ 361]  jigbox initial flow.md
 |   |       |-- [ 21K]  jigbox initial flow.pdf
 |   |       `-- [ 519]  jigbox_install.bat
-|   `-- [4.0K]  C
-|       `-- [ 579]  checkCPU.c
-`-- [ 802]  README.md
+|   |-- [4.0K]  C
+|   |   `-- [ 579]  checkCPU.c
+|   `-- [4.0K]  python
+|       `-- [3.1K]  calc_log_elapsed_time.py
+`-- [ 937]  README.md
 
-13 directories, 20 files
+14 directories, 22 files
