@@ -22,6 +22,7 @@
 |   |-- [4.0K]  bash
 |   |   |-- [2.6K]  astyle-clean.sh
 |   |   |-- [ 672]  colors_and_formatting.sh
+|   |   |-- [ 648]  kermit_load_img.ksc
 |   |   |-- [ 817]  load_img.sh
 |   |   |-- [1.2K]  ls_usb_dev.sh
 |   |   `-- [7.7K]  pishrink.sh
@@ -34,6 +35,6 @@
 |   |   `-- [ 579]  checkCPU.c
 |   `-- [4.0K]  python
 |       `-- [3.1K]  calc_log_elapsed_time.py
-`-- [ 937]  README.md
+`-- [1.0K]  README.md
 
-14 directories, 22 files
+14 directories, 23 files

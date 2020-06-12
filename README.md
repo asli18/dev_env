@@ -16,6 +16,8 @@
      * Linux terminal Colors and formatting (16 colors)
      * It displays a lot of possible combination of the attributes \
        (but not all, because it uses only one formatting attribute at a time).
+   * ***kermit_load_img.ksc(Kerbang Script)***
+     * Load image via xmodem by kermit command
    * ***load_img.sh***
      * Load image via xmodem
    * ***ls_usb_dev.sh***

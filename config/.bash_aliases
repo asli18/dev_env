@@ -91,7 +91,7 @@ com
 ### === git ===
 alias g.a='git add'
 alias g.c='git commit'
-alias g.p='git pull --rebase'
+alias g.p='git pull'
 alias g.pr='git pull --rebase'
 alias g.d='git diff --no-ext-diff --binary' # Disallow external diff drivers.
 alias g.ds='g.d --staged' # show changes that have been staged(--staged is a synonym for --cached)
@@ -140,7 +140,7 @@ alias g.sum='git show --summary'
 
 # generate a git diff file of the latast commit and use commit ID as file name.
 git_gen_diff() {
-    local head_sha_id=$(git show --summary | head -1 | awk '{ print substr($2, 1, 7) }')
+    local head_sha_id=$(git show --summary | head -1 | awk '{ print substr($2, 1, 8) }')
     local file_path=$(pwd ${head_sha_id})
     local git_dir_top=$(echo $(git rev-parse --show-toplevel) | sed 's|.*/||')
     local file_name="${git_dir_top}_${head_sha_id}.diff"
@@ -408,6 +408,7 @@ math16() {
         return 1
     fi
 
+    echo "${res}"
     echo -ne "0x"
     echo "scale=0; obase=16; ibase=16; ${1}" | bc -l
 }

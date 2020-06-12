@@ -1,0 +1,36 @@
+#!/usr/local/bin/kermit +
+
+#Load Image file to device via Xmodem
+#Kerbang Script
+
+#$ sudo kermit
+#C-Kermit> Ctrl-\
+#C-Kermit> take kermit_load_img.sh <image_path>
+
+if defined \%1 echo "Argument 1: \%1"
+if defined \%2 echo "Argument 2: \%2"
+if defined \%3 echo "Argument 3: \%3"
+
+echo "Xmodem send image"
+
+output \13
+lineout xr # output xr\13
+sleep 1
+
+set file type binary
+send \%1 -x
+#send ./Debug/output/foo.bin -x
+
+# wait 2 seconds for done
+input 2 done
+if fail stop 1 Load code fail
+
+#output ss 100006a0 0\13
+#input 2 SRAM
+#output ss 95000030 0\13
+#input 2 SRAM
+#output ss 10000038 10000\13
+#input 2 SRAM
+#output ss 10000038 0\13
+#input 2 SRAM
+
