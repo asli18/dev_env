@@ -95,6 +95,7 @@ alias g.p='git pull'
 alias g.pr='git pull --rebase'
 alias g.d='git diff --no-ext-diff --binary' # Disallow external diff drivers.
 alias g.ds='g.d --staged' # show changes that have been staged(--staged is a synonym for --cached)
+alias g.df='g.d FETCH_HEAD'
 alias g.xd='git diff --ext-diff --binary' # Allow an external diff drivers.
 alias g.meld='git difftool -t meld'
 alias g.b='git branch -v'
