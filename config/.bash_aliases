@@ -28,7 +28,10 @@ alias tree_s='tree -P "*.c|*.h"'
 # export the output in HTML format
 alias tree_to_html='tree -I ".git*|.svn|Debug|*.o|*.d|tree.*" -a -H ./ --dirsfirst -s -h > tree.html; firefox tree.html &'
 # export the output in ASCII format
-alias tree_to_ascii='tree -I ".git*|.svn|Debug|*.o|*.d|tree.*" -a --charset=ascii --dirsfirst -s -h > tree.ascii'
+alias tree_to_ascii='tree -I ".git*|.svn|Debug|*.o|*.d|tree.*" -a --charset=ascii --dirsfirst -s -h > tree.ascii; xdg-open tree.ascii'
+
+alias open_file='xdg-open' # opens a file or URL in the user's preferred application
+alias pdf='evince' # opens a PDF file
 
 alias hdc='hexdump -C'
 # print only the hex values from hexdump without line numbers or ASCII table
@@ -280,6 +283,7 @@ alias rgh='rg -t h -H --no-heading ${1}'
 alias rgs='rg -S -H --no-heading'
 alias rgcs='rg -t c -S -H --no-heading'
 alias rghs='rg -t h -S -H --no-heading'
+alias rghid='rg --hidden -e ${1}'
 
 alias frgc='find . -name "*.[c]" | xargs rg -H --no-heading ${1}'
 alias frgh='find . -name "*.[h]" | xargs rg -H --no-heading ${1}'

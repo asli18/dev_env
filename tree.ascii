@@ -28,8 +28,8 @@
 |   |   `-- [7.7K]  pishrink.sh
 |   |-- [4.0K]  batch
 |   |   `-- [4.0K]  jigbox
-|   |       |-- [ 361]  jigbox initial flow.md
-|   |       |-- [ 21K]  jigbox initial flow.pdf
+|   |       |-- [ 361]  jigbox_initial_flow.md
+|   |       |-- [ 21K]  jigbox_initial_flow.pdf
 |   |       `-- [ 519]  jigbox_install.bat
 |   |-- [4.0K]  C
 |   |   `-- [ 579]  checkCPU.c
