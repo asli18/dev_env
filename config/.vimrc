@@ -56,15 +56,23 @@ let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_math = 1
 let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_folding_level = 6
-let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_emphasis_multiline = 0
 let g:vim_markdown_conceal = 0
+
+" :Toc  Create a quickfix vertical window navigable table of contents with the headers.
+" :Toch Same as :Toc but in an horizontal window.
+let g:vim_markdown_toc_autofit = 1
 
 " ============================ Instant Markdown =====================
 " Installation
 " sudo apt-get install npm
 " sudo npm -g install instant-markdown-d
+
+let g:instant_markdown_autostart = 0
+" trigger preview  :InstantMarkdownPreview
+" stop it          :InstantMarkdownStop
 
 "let g:instant_markdown_slow = 1
 "let g:instant_markdown_open_to_the_world = 1
@@ -76,10 +84,6 @@ let g:instant_markdown_mathjax = 1
 let g:instant_markdown_autoscroll = 0
 let g:instant_markdown_port = 8888
 let g:instant_markdown_browser = "firefox --new-window"
-
-"let g:instant_markdown_autostart = 0
-" trigger preview  :InstantMarkdownPreview
-" stop it          :InstantMarkdownStop
 
 " ============================ AutoSave =============================
 let g:auto_save = 1  " enable AutoSave on Vim startup
