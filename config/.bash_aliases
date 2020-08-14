@@ -33,6 +33,11 @@ alias tree_to_ascii='tree -I ".git*|.svn|Debug|*.o|*.d|tree.*" -a --charset=asci
 alias open_file='xdg-open' # opens a file or URL in the user's preferred application
 alias pdf='evince' # opens a PDF file
 
+# dos2unix
+alias d2u_ch='find . -type f \( -name "*.c" -o -name "*.h" \) -print0 | xargs -0 dos2unix'
+# Will recursively find all files inside current directory and call for these files dos2unix command.
+alias d2u_all='find . -type f -print0 | xargs -0 dos2unix'
+
 alias hdc='hexdump -C'
 # print only the hex values from hexdump without line numbers or ASCII table
 hdn() {
