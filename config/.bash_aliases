@@ -167,15 +167,19 @@ git_gen_diff() {
 git_ap() {
     git apply --stat ${1}
     if [ $? -ne 0 ]; then
+        echo "Apply status FAIL."
         return 1;
     fi
+    echo "Apply status PASS."
 
     git apply --check ${1}
     if [ $? -ne 0 ]; then
+        echo "Apply check FAIL."
         return 1;
     fi
-    # am is better than apply
-    git am ${1}
+    echo "Apply check PASS."
+
+    git apply ${1}
 }
 
 # rename git branch locally and remotely
