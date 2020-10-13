@@ -17,6 +17,7 @@ alias fdiff='find ./ -maxdepth 1 -type f -name \*.diff'
 alias ls='ls --color=auto --group-directories-first'
 alias lsl='ls -l'
 alias ll='ls -al'
+alias lll='ls -al --color | less -R' # output with color
 alias minicom='minicom -w' # line-wrap
 alias retab='expand -t 4 ${1}' # convert tabs to 4 spaces
 alias cpu_order='lscpu | grep Endian'
@@ -47,7 +48,9 @@ hdn() {
 # hexdump display as hexedit style
 hds() {
     if [ $# -eq 1 ]; then
-        hexdump -v -e '"%08.8_ax  "' -e' 4/1 "%02x " "  " 4/1 "%02x " "  "  4/1 "%02x " "  " 4/1 "%02x "  ' -e '" |" 16/1 "%_p" "|\n"' ${1}
+        hexdump -v -e '"%08.8_ax  "' \
+                   -e ' 4/1 "%02x " "  " 4/1 "%02x " "  "  4/1 "%02x " "  " 4/1 "%02x "  ' \
+                   -e '" |" 16/1 "%_p" "|\n"' ${1}
     else
         echo "invalid input"
     fi
@@ -150,7 +153,7 @@ alias g.sum='git show --summary'
 # generate a git diff file of the latast commit and use commit ID as file name.
 git_gen_diff() {
     local head_sha_id=$(git show --summary | head -1 | awk '{ print substr($2, 1, 8) }')
-    local file_path=$(pwd ${head_sha_id})
+    local file_path=$(pwd)
     local git_dir_top=$(echo $(git rev-parse --show-toplevel) | sed 's|.*/||')
     local file_name="${git_dir_top}_${head_sha_id}.diff"
 
@@ -438,7 +441,7 @@ function sshpi {
 
 ### ================================================================================
 # List of Recently Modified Files
-function lst { ls -alrt ${1} | tail -n 10; }
+function lst { ls -alrt --color ${1} | tail -n 10; }
 
 file_changed() {
     # find all files modified in the last ${1} days
