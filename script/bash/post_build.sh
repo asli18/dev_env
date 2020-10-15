@@ -3,7 +3,10 @@
 <<com
 Add git commit id to the end of filename of bin file.
 
-Andes IDE post-build script
+Andes IDE post-build command
+- cmd /C C:\Andestech\AndeSight_STD_v321\cygwin\bin\bash.exe post_build.sh
+
+post-build script
 1. Get the project name
 2. Copy and rename the output bin file
    - result: [project name]_[git commit ID].bin
