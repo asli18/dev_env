@@ -70,14 +70,14 @@ let g:vim_markdown_toc_autofit = 1
 " sudo apt-get install npm
 " sudo npm -g install instant-markdown-d
 
-let g:instant_markdown_autostart = 0
+let g:instant_markdown_autostart = 1
 " trigger preview  :InstantMarkdownPreview
 " stop it          :InstantMarkdownStop
 
-"let g:instant_markdown_slow = 1
-"let g:instant_markdown_open_to_the_world = 1
+let g:instant_markdown_slow = 0
+let g:instant_markdown_open_to_the_world = 1
 "let g:instant_markdown_allow_unsafe_content = 1
-"let g:instant_markdown_allow_external_content = 0
+let g:instant_markdown_allow_external_content = 1
 "let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 "let g:instant_markdown_python = 1
 let g:instant_markdown_mathjax = 1
