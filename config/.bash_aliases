@@ -11,6 +11,8 @@
   illustrates the difference.
 com
 
+shopt -s autocd # change directory without `cd` command
+
 alias c='cd'
 alias ex='exit'
 alias fdiff='find ./ -maxdepth 1 -type f -name \*.diff'
