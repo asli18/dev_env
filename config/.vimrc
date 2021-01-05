@@ -409,7 +409,8 @@ Plug 'scrooloose/nerdtree'
 
 " Full path fuzzy file finder, search files
 " Press <F5> to purge the cache for the current directory to get new files,
-" remove deleted files and apply new ignore options.
+"            remove deleted files and apply new ignore options.
+" Press <c-r> to switch to regexp mode.
 Plug 'ctrlpvim/ctrlp.vim'
 
 " syntax highlight

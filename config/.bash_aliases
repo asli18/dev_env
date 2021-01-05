@@ -538,6 +538,16 @@ sfile_count() {
 }
 
 ### ================================================================================
+# Cppcheck - Tool for static C/C++ code analysis
+run_cppcheck() {
+    if [ $# -eq 1 ]; then
+        cppcheck ${1} --enable=warning,style -v
+    elif [ $# -eq 2 ]; then
+        cppcheck ${1} -I ${2} --enable=warning,style -v
+    fi
+}
+
+### ================================================================================
 # Artistic Style - Code formatter
 run_astyle() {
     if [ $# -ge 1 ]; then
