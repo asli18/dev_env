@@ -41,7 +41,20 @@ alias d2u_ch='find . -type f \( -name "*.c" -o -name "*.h" \) -print0 | xargs -0
 # Will recursively find all files inside current directory and call for these files dos2unix command.
 alias d2u_all='find . -type f -print0 | xargs -0 dos2unix'
 
+### ================================================================================
+# hexdump — ASCII, decimal, hexadecimal, octal dump
+#
+# Description
+# -n length
+# -s offset
+# -C Display the input offset in hexadecimal.
+#
+# Example:
+#   hexdump -C foo.img > foo.bin
+#   hexdump -n 32 -s 65536 foo.img
+
 alias hdc='hexdump -C'
+
 # print only the hex values from hexdump without line numbers or ASCII table
 hdn() {
     hexdump -e '16/1 "%02x " "\n"' ${1}
@@ -57,6 +70,10 @@ hds() {
         echo "invalid input"
     fi
 }
+
+### ================================================================================
+# convert any file to C array
+alias xxdi='xxd -i'
 
 # create a hex dump of file containing only the hex characters without spaces
 print_hex() {
@@ -236,6 +253,8 @@ alias g='gvim'
 alias shutdn='sudo shutdown -h 0'
 alias p0='patch -p0 -i'
 alias ssh='ssh -X'
+alias mkdirp='mkdir -p' # make parent directories as needed
+alias dfh='df -h' # report file system disk space usagea, human-readable
 
 alias mk='make'
 alias mkcl='make clean'
@@ -256,9 +275,7 @@ alias rice1='rlwrap -a -r -pyellow monice -d ice1:e -v4kec'
 alias rice2='rlwrap -a -r -pyellow monice -d ice2:e -v4kec'
 alias sq3='rlwrap -a -r -pyellow -z pipeto sqlite3'
 ### ================================================================================
-
 ### === Process operations ===
-
 # killall requires the precise process name, whereas pkill & pgrep do basic pattern matching
 
 # list PID
