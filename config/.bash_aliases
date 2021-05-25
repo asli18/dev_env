@@ -11,6 +11,12 @@
   illustrates the difference.
 com
 
+# X11 Forwarding over Gnu Screen
+echo $DISPLAY > $HOME/.display.env
+if [ ! -z ${SSH_CONNECTION+x} ]; then
+    export DISPLAY=$(cat $HOME/.display.env)
+fi
+
 shopt -s autocd # change directory without `cd` command
 
 alias c='cd'
@@ -305,15 +311,19 @@ alias fsp='find . -type f \( -name "*.sh" -o -name "*.py" \)'
 
 # rg, -S smart case, -H display file path
 #     -C context <NUM> Show NUM lines before and after each match.
+#     -t type Only search files matching TYPE. Multiple type flags may be provided.
+#             Use the --type-list flag to list all available types.
+#     --hidden Search hidden files and directories. By default, hidden files and directories
+#              are skipped.
 alias rg='rg -H --no-heading'
-alias rgn='rg -H -C ${1} --no-heading ${2}'
-alias rgs='rg -S -H --no-heading ${1}'
+alias rgc='rg -t c -H --no-heading ${1}' # c: *.[chH], *.[chH].in, *.cats
+alias rgcpp='rg -t cpp -H --no-heading ${1}' # cpp: *.[ChH], *.[ChH].in, *.[ch]pp, *.[ch]pp.in...
 
-alias rgc='rg -t c -H --no-heading ${1}'
-alias rgh='rg -t h -H --no-heading ${1}'
+alias rgn='rg -H -C ${1} --no-heading ${2}'
 alias rgs='rg -S -H --no-heading'
 alias rgcs='rg -t c -S -H --no-heading'
-alias rghs='rg -t h -S -H --no-heading'
+alias rgcpps='rg -t cpp -S -H --no-heading'
+
 alias rghid='rg --hidden -e ${1}'
 
 alias frgc='find . -name "*.[c]" | xargs rg -H --no-heading ${1}'
