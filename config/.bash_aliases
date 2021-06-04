@@ -144,6 +144,14 @@ alias g.s='git status'
 alias g.co='git checkout'
 alias g.f='git fetch'
 
+# see each hunk individually and decide whether to check them out or leave them as is.
+# y - stage this hunk
+# n - do not stage this hunk
+# s - split the current hunk into smaller hunks
+# e - manually edit the current hunk
+# ? - print help
+alias g.cop='git checkout --patch'
+
 alias g.url='git remote -v'
 alias g.curl='git config --get remote.origin.url'
 
