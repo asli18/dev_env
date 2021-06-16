@@ -293,12 +293,25 @@ alias sq3='rlwrap -a -r -pyellow -z pipeto sqlite3'
 # killall requires the precise process name, whereas pkill & pgrep do basic pattern matching
 
 # list PID
+# pidof -- find the process ID of a running program.
 alias pg='pgrep -f ${1}'
 alias pgl='pgrep -f -l ${1}' # -l print PID and process name
 alias fpid='top -b -n 1 | grep ${1}' # ${1}: process name
 alias fpid_num='top -b -n 1 | grep -c ${1}' # print counting number of basic pattern matches
 
 alias psg='ps ax | grep ${1}' # ${1}: process name
+
+# list and sort all memory & cpu usage of each process
+alias ps_usage_cpu='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head -n 20'
+alias ps_usage_mem='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -n 20'
+alias top_usage_cpu='top -b -o +%CPU | head -n 20'
+alias top_usage_mem='top -b -o +%MEM | head -n 20'
+
+# check how long a process has been running, elapsed time
+# https://www.cyberciti.biz/faq/how-to-check-how-long-a-process-has-been-running/
+# ps -p {PID} -o etime
+# ps -C {process-name} -o etime
+# ps -C {process-name} -o pid,cmd,start,etime,etimes
 
 alias kl='kill -9 ${1}' # ${1}: PID
 alias kal='killall ${1}' # ${1}: process name
@@ -393,6 +406,25 @@ export SVN_EDITOR=vim
 
 # bash turn off debug mode
 #set +xv
+
+### ================================================================================
+# Screen
+# To start a new session
+# screen -S your_session_name
+
+# rename session
+# Ctrl+a, :sessionname YOUR_SESSION_NAME Enter
+screen_rename() {
+    if [ $# -ne 2 ]; then
+        echo "Invalid input"
+        return 1
+    fi
+    local old=${1}
+    local new=${2}
+
+    screen -S ${old} -X sessionname ${new}
+    screen -ls
+}
 
 ### ================================================================================
 reload_bash() {
