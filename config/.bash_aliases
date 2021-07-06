@@ -47,6 +47,22 @@ alias d2u_ch='find . -type f \( -name "*.c" -o -name "*.h" \) -print0 | xargs -0
 # Will recursively find all files inside current directory and call for these files dos2unix command.
 alias d2u_all='find . -type f -print0 | xargs -0 dos2unix'
 
+# output log to file
+outlog() {
+    # 1: utility, 2: log file
+
+    # if one wants all(stdout+stderr) messages in file, but [ not pinted on console ]
+    # ./hello > error.log 2>&1
+
+    ${1} > ${2} 2>&1
+
+    #if one wants all(stdout+stderr) messages in file and [ printed on console ]
+    # ./helloe 2>&1 | tee error.log
+
+    ${1} 2>&1 | tee ${2}
+}
+
+
 ### ================================================================================
 # hexdump — ASCII, decimal, hexadecimal, octal dump
 #
@@ -141,6 +157,7 @@ alias g.rb='git rebase'
 alias g.rs='git reset'
 alias g.rslast='git reset HEAD~1' # Undoing the Last Commit
 alias g.s='git status'
+alias g.sig='git status --ignored' # list the ignored files
 alias g.co='git checkout'
 alias g.f='git fetch'
 
