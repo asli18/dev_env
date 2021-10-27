@@ -29,6 +29,7 @@ alias lll='ls -al --color | less -R' # output with color
 alias minicom='minicom -w' # line-wrap
 alias retab='expand -t 4 ${1}' # convert tabs to 4 spaces
 alias cpu_order='lscpu | grep Endian'
+alias time='/usr/bin/time' # type time
 
 # list all files exclude ...
 alias tree_a='tree -I ".git*|.svn|Debug|*.o|*.d" -a'
