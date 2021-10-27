@@ -108,14 +108,17 @@ let g:syntastic_c_checkers = [ 'gcc', 'make' ]
 let g:syntastic_c_compiler = 'gcc'
 let g:syntastic_c_compiler_options = '-std=gnu11 -w'
 
+" set passive mode as default
+let g:syntastic_mode_map = { 'mode': 'passive' }
+
 ":echo g:syntastic_c_compiler_options
 ":let g:syntastic_c_compiler_options = ' ... '
 
-if filereadable("inc/bsp/config.h")
-    let g:syntastic_c_compiler_options =
-            \'-include inc/bsp/config.h -std=gnu11 -w'
-            "'-include inc/bsp/config.h -std=gnu11 -W -Wall -Wextra -Wpedantic'
-endif
+"if filereadable("inc/bsp/config.h")
+"    let g:syntastic_c_compiler_options =
+"            \'-include inc/bsp/config.h -std=gnu11 -w'
+"            "'-include inc/bsp/config.h -std=gnu11 -W -Wall -Wextra -Wpedantic'
+"endif
 
 "Show the content of function
 ":function SynCfgCheck()
@@ -221,11 +224,11 @@ augroup END
 
 " trim extra space before buf write
 " remove all trailing whitespace whenever you save the file
-augroup trim_space
-    au!
-    au BufWritePre * %s/\s\+$//e
-    au BufWritePre * %s/\r//e
-augroup END
+" augroup trim_space
+"     au!
+"     au BufWritePre * %s/\s\+$//e
+"     au BufWritePre * %s/\r//e
+" augroup END
 
 " ============================ key map ============================
 " insert #if 0 - #endif around block of code
@@ -259,6 +262,10 @@ nnoremap <silent> <f4> :e!<CR><Esc>:!gtags -v<CR><Esc>:!ctags -R *<CR><Esc>
 nnoremap <silent> <f3> :NERDTreeToggle<CR>
 "nnoremap <silent> <f3> :MBEToggle<CR> " Minibuffer
 nnoremap <silent> <f2> :TlistToggle<CR>
+
+" map Alt-[ as ESC in insert & visual mode
+inoremap <A-[> <Esc>
+vnoremap <A-[> <Esc>
 
 " composing in normal mode (comflict with <C-i>)
 "nmap    <tab>   v>
