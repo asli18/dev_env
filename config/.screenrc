@@ -1,4 +1,8 @@
 
+# Customizing Screen
+# Tips and tricks
+# https://wiki.archlinux.org/title/GNU_Screen
+
 defencoding UTF-8
 
 #caption always
@@ -17,13 +21,11 @@ termcapinfo xterm-256color:rxvt ti@:te@
 
 # Tell screen how to set colors. AB = background, AF=foreground
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-
+# use current bg color for erased chars
+defbce on
 
 # Enables use of shift-PgUp and shift-PgDn
 #termcapinfo xterm|xterms|xs|rxvt ti@:te@
-
-# Erase background with current bg color
-defbce "on"
 
 # Cache 30000 lines for scroll back
 defscrollback 30000
@@ -43,4 +45,12 @@ hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r} (%{W}%n*%f%t%?(%
 
 # New mail notification
 #backtick 101 30 15 $HOME/bin/mailstatus.sh
+
+#Turn off visual bell
+#With this setting, Screen will not make an ugly screen flash instead of a bell sound.
+vbell off
+
+#Fix for residual editor text
+#When you open a text editor like nano or vim in screen and then close it, the text may stay visible in your terminal. To fix this, put the following:
+altscreen on
 
