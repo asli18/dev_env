@@ -277,10 +277,13 @@ alias svnst='svn st | grep -v ^?'
 alias rmnonsvn='svn st |grep ^? | cut -b 9- | xargs rm -rf'
 alias rmsvn='find . -name .svn -print0 | xargs -0 rm -rf'
 
+### === docker ===
+docker_exe() { docker exec -it ${1} /bin/bash; }
+
 ### ================================================================================
 alias v='vim'
 alias vi='vim'
-alias g='gvim'
+#alias g='gvim'
 
 alias shutdn='sudo shutdown -h 0'
 alias p0='patch -p0 -i'
