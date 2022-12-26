@@ -257,6 +257,8 @@ map <f8> :so $MYVIMRC<CR>
 
 " replace tab to spaces
 map <silent> <f5> :set et<CR>:retab<CR><Esc>
+" delete all trailing whitespace
+:nnoremap <silent> <f6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 nnoremap <silent> <f4> :e!<CR><Esc>:!gtags -v<CR><Esc>:!ctags -R *<CR><Esc>
 nnoremap <silent> <f3> :NERDTreeToggle<CR>
