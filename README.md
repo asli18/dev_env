@@ -1,5 +1,5 @@
 # Development Environment
-### Configuration files running on Ubuntu-18.04
+### Configuration files running on Ubuntu-22.04
 * vim
 * screen, tmux
 * alias, bash function
