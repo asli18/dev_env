@@ -224,11 +224,11 @@ augroup END
 
 " trim extra space before buf write
 " remove all trailing whitespace whenever you save the file
-" augroup trim_space
-"     au!
-"     au BufWritePre * %s/\s\+$//e
-"     au BufWritePre * %s/\r//e
-" augroup END
+augroup trim_space
+    au!
+    au BufWritePre * %s/\s\+$//e
+    au BufWritePre * %s/\r//e
+augroup END
 
 " ============================ key map ============================
 " insert #if 0 - #endif around block of code
@@ -260,7 +260,11 @@ map <silent> <f5> :set et<CR>:retab<CR><Esc>
 " delete all trailing whitespace
 :nnoremap <silent> <f6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
+" ============================ gtags, ctags =====================
+" Installation
+" sudo apt install global exuberant-ctags
 nnoremap <silent> <f4> :e!<CR><Esc>:!gtags -v<CR><Esc>:!ctags -R *<CR><Esc>
+
 nnoremap <silent> <f3> :NERDTreeToggle<CR>
 "nnoremap <silent> <f3> :MBEToggle<CR> " Minibuffer
 nnoremap <silent> <f2> :TlistToggle<CR>
