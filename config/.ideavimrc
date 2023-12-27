@@ -11,6 +11,9 @@
 " text scroll if you mouse-click near the start or end of the window.
 set scrolloff=5
 
+" Make vim use the system clipboard:
+set clipboard^=unnamed,unnamedplus
+
 " set incsearch
 set hlsearch " turn off highlighting :noh
 set backspace=2
