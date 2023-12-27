@@ -2,6 +2,13 @@
 " :map
 " :command
 
+" *         Jump to the next occurrence of the word under the cursor.
+" #         Jump to the previous occurrence of the word under the cursor.
+" Ctrl + ]  Jump to the definition of the function under the cursor.
+" Ctrl + o  Move back to the previous location.
+" Ctrl + t  Jump back to the previous location. This can only be done once.
+" G + ]     List all available jump options
+
 set hlsearch
 set backspace=2
 set autoindent
@@ -40,6 +47,7 @@ let GtagsCscope_Auto_Map = 1
 let g:ctrlp_cmd = 'CtrlP .'
 let g:acp_completeOption = &complete
 
+" Tag list (ctags)
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 "let g:miniBufExplMapWindowNavArrows = 1
@@ -147,6 +155,12 @@ let g:syntastic_c_config_file = '.asli_syntastic_c_config'
 " python flake8
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_python_exec = 'python3'
+
+" ============================ Highlight ============================
+let g:highlightedyank_highlight_duration = 1000
+" default
+let g:highlightedyank_highlight_color = ""
+" let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
 " ===============================================================================
 
 " show tab and space characters
@@ -305,6 +319,8 @@ nnoremap <C-l> <C-w>l
 "inoremap \"      \""<Esc>i
 "inoremap '      ''<Esc>i
 "inoremap [      []<Esc>i
+
+" Automatically inserts a code block after pressing `{` in insert mode.
 inoremap {<CR>  {<CR>}<Esc>ko
 
 " ReplaceWithRegister
@@ -457,6 +473,13 @@ Plug 'plasticboy/vim-markdown'
 " Instant Markdown previews from Vim
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+" Commentary plugin
+"   Normal mode: gcc
+"   Visual mode: gc
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 

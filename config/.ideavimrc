@@ -1,0 +1,50 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" * Jump to the next occurrence of the word under the cursor.
+" # Jump to the previous occurrence of the word under the cursor.
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" set incsearch
+set hlsearch " turn off highlighting :noh
+set backspace=2
+
+" ----------------------------------------------------------------
+" map Alt-[ as ESC in insert & visual mode
+inoremap <A-[> <Esc>
+vnoremap <A-[> <Esc>
+
+" composing in virtual mode
+vmap    <tab>   >gv
+vmap    <s-tab> <gv
+
+" pane navigation with arrow key
+noremap <C-Up>    <C-w>k
+noremap <C-Down>  <C-w>j
+noremap <C-Left>  <C-w>h
+noremap <C-Right> <C-w>l
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" replace text with the contents of a register
+Plug 'vim-scripts/ReplaceWithRegister'
+" ReplaceWithRegister
+xmap r <Plug>ReplaceWithRegisterVisual
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 1000
+" default
+let g:highlightedyank_highlight_color = ""
+" let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+
+" Commentary plugin
+"   Normal mode: gcc
+"   Visual mode: gc
+Plug 'tpope/vim-commentary'
