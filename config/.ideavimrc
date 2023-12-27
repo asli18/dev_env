@@ -19,6 +19,23 @@ set hlsearch " turn off highlighting :noh
 set backspace=2
 
 " ----------------------------------------------------------------
+" Use sethandler to resolve shortcut conflicts for active keymap.
+sethandler <C-B> a:vim
+sethandler <C-C> a:ide
+sethandler <C-E> a:vim
+sethandler <C-F> a:vim
+sethandler <C-G> a:vim
+sethandler <C-H> a:ide
+sethandler <C-I> a:vim
+sethandler <C-O> a:vim
+sethandler <C-R> a:vim
+sethandler <C-S> a:ide
+sethandler <C-T> a:vim
+sethandler <C-V> a:ide
+sethandler <C-W> a:vim
+sethandler <C-Y> a:vim
+sethandler <A-[> a:vim
+
 " map Alt-[ as ESC in insert & visual mode
 inoremap <A-[> <Esc>
 vnoremap <A-[> <Esc>
