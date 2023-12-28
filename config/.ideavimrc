@@ -14,12 +14,13 @@ set scrolloff=5
 " Make vim use the system clipboard:
 set clipboard^=unnamed,unnamedplus
 
-" set incsearch
+set incsearch
 set hlsearch " turn off highlighting :noh
 set backspace=2
 
 " ----------------------------------------------------------------
 " Use sethandler to resolve shortcut conflicts for active keymap.
+sethandler <S-Tab> a:vim
 sethandler <C-B> a:vim
 sethandler <C-C> a:ide
 sethandler <C-E> a:vim
@@ -35,6 +36,7 @@ sethandler <C-V> a:ide
 sethandler <C-W> a:vim
 sethandler <C-Y> a:vim
 sethandler <A-[> a:vim
+sethandler <C-]> a:vim
 
 " map Alt-[ as ESC in insert & visual mode
 inoremap <A-[> <Esc>

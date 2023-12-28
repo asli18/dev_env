@@ -9,6 +9,7 @@
 " Ctrl + t  Jump back to the previous location. This can only be done once.
 " G + ]     List all available jump options
 
+set incsearch
 set hlsearch
 set backspace=2
 set autoindent
