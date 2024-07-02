@@ -461,7 +461,7 @@ reload_bash() {
     source ~/.bash_aliases
 }
 
-# display the attributes and value of each NAME
+# display the attributes and value of variable
 # print out just the body of the function
 # -- string
 # -i integer
@@ -476,9 +476,9 @@ typec() {
 }
 
 sys_update() {
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt autoremove && sudo apt clean
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt autoremove -y && sudo apt clean
 }
 
 rmtags() {
@@ -553,7 +553,6 @@ file_changed() {
 
 ### ================================================================================
 #function arm { cd ~/work/proj/${1}/Customer/Phison/FPGA_Verify/trunk/fw; }
-#function andes { cd ~/work/proj/${1}/Customer/Phison/opt_andes_fpga_test/trunk/fw; }
 # dd skip=0 count=16384 bs=1 if=Debug/output/ps5016_opt_test.bin of=ps5016_opt_test.bin
 function andes { cd ~/work/proj/sa_andes/base/et760-2.0/; }
 function tool { cd ~/work/proj/sa_andes/tool/; }

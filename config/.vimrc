@@ -11,7 +11,8 @@
 
 set incsearch
 set hlsearch
-set backspace=2
+" set backspace=2
+set backspace=indent,eol,start
 set autoindent
 set ruler
 set showmode
@@ -37,11 +38,20 @@ if &term =~ '256color'
     set t_ut=
 endif
 
+let mapleader = ","
+
 " run 'ctags -R *' command to create the tags file
 "set tags=./tags,tags;
 let g:autotagTagsFile=".tags"
 
-set complete=.,w,b,] " need ctags file
+" .: Scan the current buffer
+" w: Scan buffers from other windows
+" b: Scan buffers from the buffer list
+" u: Scan buffers that have been unloaded from the buffer list
+" t: Tag completion
+" i: Scan the current and included files
+set complete=.,w,b,u,t,i " need ctags file
+"set complete=.,w,b,u,t
 
 let Gtags_Auto_Update = 1
 let GtagsCscope_Auto_Map = 1
@@ -53,16 +63,63 @@ let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 "let g:miniBufExplMapWindowNavArrows = 1
 
+" ============================ airline =============================
 " airline file buffer
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" ============================ Lightline =============================
+" Lightline configuration
+set laststatus=2
+
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename'
+      \ },
+      \ }
+
+function! LightlineFilename()
+  return expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+endfunction
+
+" Lightline-bufferline configuration
+set showtabline=2
+
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline#bufferline#clickable = 0
+
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+nmap <Tab>   <Plug>lightline#bufferline#go_next()
+nmap <S-Tab> <Plug>lightline#bufferline#go_previous()
+
+nmap <Leader>c1 <Plug>lightline#bufferline#delete(1)
+nmap <Leader>c2 <Plug>lightline#bufferline#delete(2)
+nmap <Leader>c3 <Plug>lightline#bufferline#delete(3)
+nmap <Leader>c4 <Plug>lightline#bufferline#delete(4)
+nmap <Leader>c5 <Plug>lightline#bufferline#delete(5)
+nmap <Leader>c6 <Plug>lightline#bufferline#delete(6)
+nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
+nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
+nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
+nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
 
 " ============================ Markdown =============================
-let g:vim_markdown_new_list_item_indent = 3
+let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_math = 1
 let g:vim_markdown_no_default_key_mappings = 1
 let g:vim_markdown_folding_disabled = 1
@@ -97,7 +154,7 @@ let g:instant_markdown_browser = "firefox --new-window"
 " ============================ AutoSave =============================
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
-let g:auto_save_events = ["InsertLeave", "TextChanged"]
+let g:auto_save_events = ['InsertLeave', 'TextChanged']
 
 "let g:auto_save_write_all_buffers = 1  " write all open buffers as if you would use :wa
 
@@ -172,7 +229,7 @@ set ts=4 sw=4 sts=4
 " tab expand to 4 space
 set expandtab
 " expand exist tab to space
-retab
+:retab
 
 set lazyredraw
 set ttyfast
@@ -295,8 +352,6 @@ vnoremap <A-[> <Esc>
 vmap    <tab>   >gv
 vmap    <s-tab> <gv
 
-"let mapleader = ","
-
 " access system clipboard
 "noremap <leader>x "+x
 "noremap <leader>y "+y
@@ -341,7 +396,7 @@ nmap <Space>j <Plug>(quickhl-cword-toggle)
 "autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 "autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
 
-autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+autocmd BufNewFile *.sh,*.py call AutoSetFileHead()
 function! AutoSetFileHead()
     " .sh
     if &filetype == 'sh'
@@ -427,7 +482,12 @@ call plug#begin('~/.vim/plugged')
 "Plug 'fholgado/minibufexpl.vim'
 Plug 'vim-scripts/taglist.vim'
 Plug 'vim-scripts/256-jungle'
-Plug 'vim-airline/vim-airline'
+
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+
 "Plug 'chazy/cscope_maps'
 Plug 'aceofall/gtags.vim'
 
