@@ -379,12 +379,12 @@ inoremap {<CR>  {<CR>}<Esc>ko
 xmap r <Plug>ReplaceWithRegisterVisual
 
 " quickly highlight
-nnoremap <Space>m <Plug>(quickhl-manual-this)
-xnoremap <Space>m <Plug>(quickhl-manual-this)
-nnoremap <Space>M <Plug>(quickhl-manual-reset)
-xnoremap <Space>M <Plug>(quickhl-manual-reset)
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
 " automatically higlight word under cursor
-nnoremap <Space>j <Plug>(quickhl-cword-toggle)
+nmap <Space>j <Plug>(quickhl-cword-toggle)
 
 " ============================ specific file type ===========================
 
