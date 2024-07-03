@@ -380,7 +380,7 @@ nnoremap <C-l> <C-w>l
 inoremap {<CR>  {<CR>}<Esc>ko
 
 " ReplaceWithRegister
-xnoremap r <Plug>ReplaceWithRegisterVisual
+xmap r <Plug>ReplaceWithRegisterVisual
 
 " quickly highlight
 nnoremap <Space>m <Plug>(quickhl-manual-this)
