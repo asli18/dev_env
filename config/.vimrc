@@ -306,13 +306,13 @@ augroup END
 " insert #if 0 - #endif around block of code
 " type ma mark start line
 " then move to the line that should be last line and press ;'
-map ;' <Esc>:AutoSaveToggle<CR>mz'aO<Esc>i#if 0<Esc>'zo<Esc>i#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
-map ;; <Esc>:AutoSaveToggle<CR>mz'aO<Esc>i#if (<C-r>" == 1)<Esc>'zo<Esc>i#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
+nnoremap ;' <Esc>:AutoSaveToggle<CR>mz'aO<Esc>i#if 0<Esc>'zo<Esc>i#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
+nnoremap ;; <Esc>:AutoSaveToggle<CR>mz'aO<Esc>i#if (<C-r>" == 1)<Esc>'zo<Esc>i#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
 
-vmap ;' o<Esc>:AutoSaveToggle<CR>O#if 0<Esc>'>o#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
-vmap ;; o<Esc>:AutoSaveToggle<CR>O#if (<C-r>" == 1)<Esc>'>o#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
+xnoremap ;' o<Esc>:AutoSaveToggle<CR>O#if 0<Esc>'>o#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
+xnoremap ;; o<Esc>:AutoSaveToggle<CR>O#if (<C-r>" == 1)<Esc>'>o#endif<Esc>j:w<CR>:AutoSaveToggle<CR>
 " delete #if 0 - #endif
-vmap '; o<Esc>:AutoSaveToggle<CR>dd<Esc>'><Esc>dd:w<CR>:AutoSaveToggle<CR>
+xnoremap '; o<Esc>:AutoSaveToggle<CR>dd<Esc>'><Esc>dd:w<CR>:AutoSaveToggle<CR>
 
 
 " cscope command "
@@ -325,12 +325,12 @@ set pastetoggle=<f9>
 
 " reload vimrc without restarting vim
 "map <silent> <f8> :so $MYVIMRC<CR>
-map <f8> :so $MYVIMRC<CR>
+nnoremap <f8> :so $MYVIMRC<CR>
 
 " replace tab to spaces
-map <silent> <f5> :set et<CR>:retab<CR><Esc>
+nnoremap <silent> <f5> :set et<CR>:retab<CR><Esc>
 " delete all trailing whitespace
-:nnoremap <silent> <f6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+nnoremap <silent> <f6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 " ============================ gtags, ctags =====================
 " Installation
@@ -343,14 +343,14 @@ nnoremap <silent> <f2> :TlistToggle<CR>
 
 " map Alt-[ as ESC in insert & visual mode
 inoremap <A-[> <Esc>
-vnoremap <A-[> <Esc>
+xnoremap <A-[> <Esc>
 
 " composing in normal mode (comflict with <C-i>)
 "nmap    <tab>   v>
 "nmap    <s-tab> v<
 " composing in virtual mode
-vmap    <tab>   >gv
-vmap    <s-tab> <gv
+xnoremap <tab>   >gv
+xnoremap <s-tab> <gv
 
 " access system clipboard
 "noremap <leader>x "+x
@@ -380,15 +380,15 @@ nnoremap <C-l> <C-w>l
 inoremap {<CR>  {<CR>}<Esc>ko
 
 " ReplaceWithRegister
-xmap r <Plug>ReplaceWithRegisterVisual
+xnoremap r <Plug>ReplaceWithRegisterVisual
 
 " quickly highlight
-nmap <Space>m <Plug>(quickhl-manual-this)
-xmap <Space>m <Plug>(quickhl-manual-this)
-nmap <Space>M <Plug>(quickhl-manual-reset)
-xmap <Space>M <Plug>(quickhl-manual-reset)
+nnoremap <Space>m <Plug>(quickhl-manual-this)
+xnoremap <Space>m <Plug>(quickhl-manual-this)
+nnoremap <Space>M <Plug>(quickhl-manual-reset)
+xnoremap <Space>M <Plug>(quickhl-manual-reset)
 " automatically higlight word under cursor
-nmap <Space>j <Plug>(quickhl-cword-toggle)
+nnoremap <Space>j <Plug>(quickhl-cword-toggle)
 
 " ============================ specific file type ===========================
 
@@ -518,10 +518,13 @@ Plug 'scrooloose/syntastic'
 Plug 'nvie/vim-flake8'
 
 " Add parentheses, brackets, quotes ...
-" select text and type Sb (surround-braces), or S) (note the capital S !).
-" cs"' (change-surround " to '). Or you can completely delete quotes by typing
-" ds"  (delete-surround ").
-" There is a difference between typing '(' and ')', '(' would pad a space in the braces.
+" Select mode:
+"   Sb (surround-braces), or S)
+" Normal mode:
+"   cs{' change-surround { to '
+"     {Hello world!}  change it to  'Hello world!'
+"   ds" delete-surround "
+"     Hello world!
 Plug 'tpope/vim-surround'
 " The . command will work with ds, cs, and yss if you install repeat.vim.
 Plug 'tpope/vim-repeat'
