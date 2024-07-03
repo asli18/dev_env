@@ -11,20 +11,16 @@
 
 set incsearch
 set hlsearch
-" set backspace=2
 set backspace=indent,eol,start
 set autoindent
 set ruler
 set showmode
-"set rnu
 set bg=dark
 set ff=unix
-
 set nocp
-
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set number
-set mouse=a
+set mouse=
 "set guifont=Courier\ New\ Bold\ 11
 set guifont=Consolas:h20
 "set guifont=consolas:h15
@@ -383,12 +379,12 @@ inoremap {<CR>  {<CR>}<Esc>ko
 xmap r <Plug>ReplaceWithRegisterVisual
 
 " quickly highlight
-nmap <Space>m <Plug>(quickhl-manual-this)
-xmap <Space>m <Plug>(quickhl-manual-this)
-nmap <Space>M <Plug>(quickhl-manual-reset)
-xmap <Space>M <Plug>(quickhl-manual-reset)
+nnoremap <Space>m <Plug>(quickhl-manual-this)
+xnoremap <Space>m <Plug>(quickhl-manual-this)
+nnoremap <Space>M <Plug>(quickhl-manual-reset)
+xnoremap <Space>M <Plug>(quickhl-manual-reset)
 " automatically higlight word under cursor
-nmap <Space>j <Plug>(quickhl-cword-toggle)
+nnoremap <Space>j <Plug>(quickhl-cword-toggle)
 
 " ============================ specific file type ===========================
 
