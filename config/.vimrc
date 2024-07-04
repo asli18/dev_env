@@ -20,7 +20,7 @@ set ff=unix
 set nocp
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set number
-set mouse=
+set mouse=n
 "set guifont=Courier\ New\ Bold\ 11
 set guifont=Consolas:h20
 "set guifont=consolas:h15
