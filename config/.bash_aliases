@@ -351,22 +351,25 @@ alias gnsp='grep -rn -i --include \*.sh --include \*.py ${1}'
 alias fch='find . -type f \( -name "*.c" -o -name "*.h" \)'
 alias fsp='find . -type f \( -name "*.sh" -o -name "*.py" \)'
 
-# rg, -S smart case, -H display file path
+# rg, -u, --unrestricted
+#           Reduce the level of "smart" searching. A single -u won't respect .gitignore
+#     -H display file path
+#     -S smart case
 #     -C context <NUM> Show NUM lines before and after each match.
 #     -t type Only search files matching TYPE. Multiple type flags may be provided.
-#             Use the --type-list flag to list all available types.
-#     --hidden Search hidden files and directories. By default, hidden files and directories
-#              are skipped.
-alias rg='rg -H --no-heading'
-alias rgc='rg -t c -H --no-heading ${1}' # c: *.[chH], *.[chH].in, *.cats
+#           Use the --type-list flag to list all available types.
+#     --hidden Search hidden files and directories.
+#           By default, hidden files and directories are skipped.
+alias rg='rg -u -H --no-heading'
+alias rgc='rg -u -t c -H --no-heading ${1}' # c: *.[chH], *.[chH].in, *.cats
 alias rgcpp='rg -t cpp -H --no-heading ${1}' # cpp: *.[ChH], *.[ChH].in, *.[ch]pp, *.[ch]pp.in...
 
-alias rgn='rg -H -C ${1} --no-heading ${2}'
-alias rgs='rg -S -H --no-heading'
-alias rgcs='rg -t c -S -H --no-heading'
-alias rgcpps='rg -t cpp -S -H --no-heading'
+alias rgn='rg -u -H -C ${1} --no-heading ${2}'
+alias rgs='rg -u -S -H --no-heading'
+alias rgcs='rg -u -t c -S -H --no-heading'
+alias rgcpps='rg -u -t cpp -S -H --no-heading'
 
-alias rghid='rg --hidden -e ${1}'
+alias rghid='rg -u --hidden -e ${1}'
 
 alias frgc='find . -name "*.[c]" | xargs rg -H --no-heading ${1}'
 alias frgh='find . -name "*.[h]" | xargs rg -H --no-heading ${1}'
