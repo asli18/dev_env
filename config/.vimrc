@@ -59,6 +59,10 @@ let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 "let g:miniBufExplMapWindowNavArrows = 1
 
+" Prevent * and # from automatically jumping
+nnoremap * *N
+nnoremap # #N
+
 " ============================ airline =============================
 " airline file buffer
 "let g:airline#extensions#tabline#enabled = 1
