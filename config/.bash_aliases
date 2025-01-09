@@ -464,8 +464,7 @@ reload_bash() {
     source ~/.bash_aliases
 }
 
-# display the attributes and value of variable
-# print out just the body of the function
+# display the current value and attributes of a variable
 # -- string
 # -i integer
 # -a arrays
@@ -558,8 +557,6 @@ file_changed() {
 #function arm { cd ~/work/proj/${1}/Customer/Phison/FPGA_Verify/trunk/fw; }
 # dd skip=0 count=16384 bs=1 if=Debug/output/ps5016_opt_test.bin of=ps5016_opt_test.bin
 function andes { cd ~/work/proj/sa_andes/base/et760-2.0/; }
-function tool { cd ~/work/proj/sa_andes/tool/; }
-function rasp { cd ~/work/proj/sa_raspberry/kaleidoscope/; }
 
 sed_name() {
     if [ $# -eq 3 ]; then
@@ -567,8 +564,11 @@ sed_name() {
         sed -i "s/${1}/${2}/g" ${3}
     elif [ $# -eq 2 ]; then
         echo -e "Change Name ${GREEN}${1}${NC} to ${GREEN}${2}${NC}"
-        #exclude svn-directories
-        find . -name .svn -prune -o -type f -print0 | xargs -0 -n 1 sed -i -e "s/${1}/${2}/g"
+        # exclude .git .svn directories
+        find . \
+          \( -path ./.git -o -path ./.svn \) -prune -o \
+          -type f -print0 | \
+          xargs -0 -n 1 sed -i -e "s/${1}/${2}/g";
     else
         echo "Invalid input: sed_name {old} {new} ({file path})"
     fi
