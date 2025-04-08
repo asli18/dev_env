@@ -51,7 +51,11 @@ set complete=.,w,b,u,t,i " need ctags file
 
 let Gtags_Auto_Update = 1
 let GtagsCscope_Auto_Map = 1
+
 let g:ctrlp_cmd = 'CtrlP .'
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 let g:acp_completeOption = &complete
 
 " Tag list (ctags)
