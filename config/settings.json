@@ -1,0 +1,19 @@
+{
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.defaultProfile.windows": "Ubuntu-22.04 (WSL)",
+    "workbench.iconTheme": "vscode-icons",
+
+    "files.trimTrailingWhitespace": true,
+
+    "editor.rulers": [100],
+    "editor.renderWhitespace": "all",
+    "editor.fontFamily": "'Cascadia Mono', Consolas, 'Courier New', monospace",
+    "editor.minimap.enabled": false,
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.clang_format_fallbackStyle": "LLVM",
+}
