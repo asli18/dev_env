@@ -1,45 +1,57 @@
+BasedOnStyle: WebKit
 Language: Cpp
+Standard: Latest # c++11 20
 SortIncludes: Never
 SortUsingDeclarations: true
-BasedOnStyle: LLVM
+ColumnLimit: 80
 IndentWidth: 4
+ContinuationIndentWidth: 4
 
+AlignOperands: Align
+AlignEscapedNewlines: Left
 AlignAfterOpenBracket: Align
-# AlignOperands: Align
-BreakFunctionDefinitionParameters: false
-BreakBeforeTernaryOperators: false
-ColumnLimit: 90
-PointerAlignment: Right
-SpaceAfterCStyleCast: false
-SkipMacroDefinitionBody: true
-
-AlignTrailingComments: false
-SpacesBeforeTrailingComments: 2
-
-AlignConsecutiveAssignments: false
+AlignTrailingComments: true
 AlignArrayOfStructures: None
-Cpp11BracedListStyle: false
-
+AlignConsecutiveAssignments: false
 AllowShortBlocksOnASingleLine: Always
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: None
 AllowAllParametersOfDeclarationOnNextLine: true
+AllowAllArgumentsOnNextLine: true
 
+BreakBeforeTernaryOperators: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakTemplateDeclarations: Leave
+BreakFunctionDefinitionParameters: false
+PointerAlignment: Right
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceBeforeCaseColon: false
 SpaceBeforeParens: ControlStatements
+SpaceBeforeSquareBrackets: false
+SpacesInContainerLiterals: false
 SpaceBeforeAssignmentOperators: true
+SpaceBeforeRangeBasedForLoopColon: true
+SpacesBeforeTrailingComments: 2
+SkipMacroDefinitionBody: true
+
+IndentCaseLabels: false
+IndentPPDirectives: None
+
+Cpp11BracedListStyle: true
+PackConstructorInitializers: CurrentLine
 BinPackParameters: OnePerLine
 BinPackArguments: false
 BinPackLongBracedList: true
 CompactNamespaces: false
-BreakBeforeBinaryOperators: None
 
-BreakTemplateDeclarations: Leave
-AllowAllArgumentsOnNextLine: false
+RemoveEmptyLinesInUnwrappedLines: true
 
 # Strongly discourage breaking after the return type
-PenaltyReturnTypeOnItsOwnLine: 1000
 PenaltyBreakAssignment: 1000
+PenaltyBreakBeforeFirstCallParameter: 1000
+PenaltyReturnTypeOnItsOwnLine: 1000
 
 BreakBeforeBraces: Attach
 # BreakBeforeBraces: Custom

@@ -6,7 +6,7 @@
 
     "files.trimTrailingWhitespace": true,
 
-    "editor.rulers": [100],
+    "editor.rulers": [80],
     "editor.renderWhitespace": "all",
     "editor.fontFamily": "'Cascadia Mono', Consolas, 'Courier New', monospace",
     "editor.minimap.enabled": false,
