@@ -47,7 +47,7 @@ select = [
     "I",  # isort
     "C",  # flake8-comprehensions
     "B",  # flake8-bugbear
-    "UP",  # pyupgrade
+    # "UP",  # pyupgrade
 ]
 # select = ["E", "F"]
 
