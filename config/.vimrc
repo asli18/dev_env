@@ -9,6 +9,84 @@
 " Ctrl + t  Jump back to the previous location. This can only be done once.
 " G + ]     List all available jump options
 
+":PlugInstall
+":PlugUpdate
+":PlugClean
+
+call plug#begin('~/.vim/plugged')
+"silent call plug#begin('~/.vim/plugged')
+" silent mode, errors are not displayed
+" (apply this mode if there is no internet connection
+"
+"Plug 'fholgado/minibufexpl.vim'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/256-jungle'
+Plug 'junegunn/seoul256.vim'
+
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+
+"Plug 'chazy/cscope_maps'
+Plug 'aceofall/gtags.vim'
+
+" replace text with the contents of a register
+Plug 'vim-scripts/ReplaceWithRegister'
+
+" file system explorer
+Plug 'scrooloose/nerdtree'
+
+" Full path fuzzy file finder, search files
+" Press <F5> to purge the cache for the current directory to get new files,
+"            remove deleted files and apply new ignore options.
+" Press <c-r> to switch to regexp mode.
+Plug 'ctrlpvim/ctrlp.vim'
+
+" syntax highlight
+"Plug 'sheerun/vim-polyglot'
+Plug 'NLKNguyen/c-syntax.vim'
+
+" code-completion
+Plug 'vim-scripts/AutoComplPop'
+
+" quickly highlight
+Plug 't9md/vim-quickhl'
+
+" Syntastic, syntax checking plugin, lint
+Plug 'scrooloose/syntastic'
+Plug 'nvie/vim-flake8'
+
+" Add parentheses, brackets, quotes ...
+" Select mode:
+"   Sb (surround-braces), or S)
+" Normal mode:
+"   cs{' change-surround { to '
+"     {Hello world!}  change it to  'Hello world!'
+"   ds" delete-surround "
+"     Hello world!
+Plug 'tpope/vim-surround'
+" The . command will work with ds, cs, and yss if you install repeat.vim.
+Plug 'tpope/vim-repeat'
+
+" AutoSave - automatically saves changes to disk without having to use :w
+Plug '907th/vim-auto-save'
+
+" Markdown Syntax highlighting
+Plug 'plasticboy/vim-markdown'
+" Instant Markdown previews from Vim
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+" Commentary plugin
+"   Normal mode: gcc
+"   Visual mode: gc
+Plug 'tpope/vim-commentary'
+
+call plug#end()
+
 set incsearch
 set hlsearch
 set backspace=indent,eol,start
@@ -273,16 +351,32 @@ colorscheme 256-jungle
 "colorscheme molokai
 "colorscheme onedark
 
-" overwrite colorscheme setting(xterm-256)
-"hi Comment      ctermfg=244     ctermbg=None    cterm=None
-"hi Comment      ctermfg=29      ctermbg=None    cterm=None
-hi Comment      ctermfg=131     ctermbg=None    cterm=None
-hi Normal       ctermfg=252     ctermbg=234     cterm=None
-hi Constant     ctermfg=34      ctermbg=None    cterm=None
-hi Boolean      ctermfg=166     ctermbg=None    cterm=Bold
-hi cDefine      ctermfg=96      ctermbg=None    cterm=Bold
+" Unified color scheme (default: dark)
+" seoul256 (dark):
+"   Range:   233 (darkest) ~ 239 (lightest)
+"   Default: 237
+let g:seoul256_background = 233
+"colorscheme seoul256
 
-hi cursorline   ctermfg=None    ctermbg=16      cterm=None
+if exists('g:colors_name')
+    if g:colors_name == '256-jungle'
+        " overwrite colorscheme setting(xterm-256)
+        hi Comment      ctermfg=244     ctermbg=None    cterm=None
+        "hi Comment      ctermfg=29      ctermbg=None    cterm=None
+        "hi Comment      ctermfg=131     ctermbg=None    cterm=None
+
+        "hi Normal       ctermfg=254     ctermbg=234     cterm=None
+        hi Normal       ctermfg=253     ctermbg=16
+        hi Constant     ctermfg=34      ctermbg=None    cterm=None
+        hi Boolean      ctermfg=166     ctermbg=None    cterm=Bold
+        hi cDefine      ctermfg=96      ctermbg=None    cterm=Bold
+        hi cursorline   ctermfg=None    ctermbg=16      cterm=None
+
+    elseif g:colors_name == 'seoul256'
+        hi Comment      ctermfg=244     ctermbg=None    cterm=None
+        hi String       ctermfg=29
+    endif
+endif
 
 " if else switch while for do case default goto break return continue asm
 " + - * / = [] | & % . -> ! ~ > <
@@ -474,80 +568,4 @@ augroup Binary
     au BufWritePost *.bin set nomod | endif
 augroup END
 
-":PlugInstall
-":PlugUpdate
-":PlugClean
-
-call plug#begin('~/.vim/plugged')
-"silent call plug#begin('~/.vim/plugged')
-" silent mode, errors are not displayed
-" (apply this mode if there is no internet connection
-"
-"Plug 'fholgado/minibufexpl.vim'
-Plug 'vim-scripts/taglist.vim'
-Plug 'vim-scripts/256-jungle'
-
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-
-"Plug 'chazy/cscope_maps'
-Plug 'aceofall/gtags.vim'
-
-" replace text with the contents of a register
-Plug 'vim-scripts/ReplaceWithRegister'
-
-" file system explorer
-Plug 'scrooloose/nerdtree'
-
-" Full path fuzzy file finder, search files
-" Press <F5> to purge the cache for the current directory to get new files,
-"            remove deleted files and apply new ignore options.
-" Press <c-r> to switch to regexp mode.
-Plug 'ctrlpvim/ctrlp.vim'
-
-" syntax highlight
-"Plug 'sheerun/vim-polyglot'
-Plug 'NLKNguyen/c-syntax.vim'
-
-" code-completion
-Plug 'vim-scripts/AutoComplPop'
-
-" quickly highlight
-Plug 't9md/vim-quickhl'
-
-" Syntastic, syntax checking plugin, lint
-Plug 'scrooloose/syntastic'
-Plug 'nvie/vim-flake8'
-
-" Add parentheses, brackets, quotes ...
-" Select mode:
-"   Sb (surround-braces), or S)
-" Normal mode:
-"   cs{' change-surround { to '
-"     {Hello world!}  change it to  'Hello world!'
-"   ds" delete-surround "
-"     Hello world!
-Plug 'tpope/vim-surround'
-" The . command will work with ds, cs, and yss if you install repeat.vim.
-Plug 'tpope/vim-repeat'
-
-" AutoSave - automatically saves changes to disk without having to use :w
-Plug '907th/vim-auto-save'
-
-" Markdown Syntax highlighting
-Plug 'plasticboy/vim-markdown'
-" Instant Markdown previews from Vim
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-
-" Highlight copied text
-Plug 'machakann/vim-highlightedyank'
-
-" Commentary plugin
-"   Normal mode: gcc
-"   Visual mode: gc
-Plug 'tpope/vim-commentary'
-
-call plug#end()
 
