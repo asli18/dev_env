@@ -36,42 +36,40 @@ indent-width = 4
 target-version = "py311"
 
 [lint]
-# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Enable Pyflakes (`F`), pycodestyle errors (`E`), pycodestyle warnings (`W`),
+# isort (`I`), flake8-comprehensions (`C`), flake8-bugbear (`B`), and pyupgrade (`UP`) rules.
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
-# select = ["E4", "E7", "E9", "F"]
 select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "I",  # isort
-    "C",  # flake8-comprehensions
-    "B",  # flake8-bugbear
-    # "UP",  # pyupgrade
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C",   # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
 ]
-# select = ["E", "F"]
 
-# Never enforce `E501` (line length violations).
-# ignore = ["E501"]
+# Ignore specific rules.
 ignore = [
-    "B008",  # do not perform function calls in argument defaults
-    "C901",  # too complex
+    "B008",  # Do not perform function calls in argument defaults
+    "C901",  # Too complex (McCabe complexity)
 ]
 
-# Allow fix for all enabled rules (when `--fix`) is provided.
+# Allow fixing for all enabled rules when `--fix` is provided.
 fixable = ["ALL"]
-# unfixable = []
-# Always autofix, but never try to fix `F401` (unused imports).
+# Never try to autofix `F401` (unused imports).
 unfixable = ["F401"]
 
-# Allow unused variables when underscore-prefixed.
+# Allow unused variables when they are underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
 
 [format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
 
-# Like Black, indent with spaces, rather than tabs.
+# Like Black, indent with spaces rather than tabs.
 indent-style = "space"
 
 # Like Black, respect magic trailing commas.
@@ -82,19 +80,15 @@ line-ending = "auto"
 
 # Enable auto-formatting of code examples in docstrings. Markdown,
 # reStructuredText code/literal blocks and doctests are all supported.
-#
-# This is currently disabled by default, but it is planned for this
-# to be opt-out in the future.
+# This is currently disabled by default, but it is planned to be opt-out in the future.
 docstring-code-format = false
 
-# Set the line length limit used when formatting code snippets in
-# docstrings.
-#
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
+# Set the line length limit used when formatting code snippets in docstrings.
+# This only takes effect when `docstring-code-format` is enabled.
 docstring-code-line-length = "dynamic"
 
-# Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
+
+# Ignore `E402` (import violations) in all `__init__.py` files and a specific file `path/to/file.py`.
 [per-file-ignores]
 "__init__.py" = ["E402"]
 "path/to/file.py" = ["E402"]
