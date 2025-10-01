@@ -345,7 +345,7 @@ syntax enable
 syntax on
 
 " ============================ theme and status line ============================
-colorscheme 256-jungle
+"colorscheme 256-jungle
 "colorscheme wombat256mod
 "colorscheme buddy
 "colorscheme molokai
@@ -356,7 +356,7 @@ colorscheme 256-jungle
 "   Range:   233 (darkest) ~ 239 (lightest)
 "   Default: 237
 let g:seoul256_background = 233
-"colorscheme seoul256
+colorscheme seoul256
 
 if exists('g:colors_name')
     if g:colors_name == '256-jungle'
@@ -373,8 +373,8 @@ if exists('g:colors_name')
         hi cursorline   ctermfg=None    ctermbg=16      cterm=None
 
     elseif g:colors_name == 'seoul256'
-        hi Comment      ctermfg=244     ctermbg=None    cterm=None
-        hi String       ctermfg=29
+        "hi Comment      ctermfg=244     ctermbg=None    cterm=None
+        "hi String       ctermfg=29
     endif
 endif
 
