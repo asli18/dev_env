@@ -556,18 +556,29 @@ file_changed() {
 ### ================================================================================
 #function arm { cd ~/work/proj/${1}/Customer/Phison/FPGA_Verify/trunk/fw; }
 # dd skip=0 count=16384 bs=1 if=Debug/output/ps5016_opt_test.bin of=ps5016_opt_test.bin
-function andes { cd ~/work/proj/sa_andes/base/et760-2.0/; }
+function ddr_fw { cd /mnt/d/vitis_workspace/ddr_training; }
+function ddr_ui { cd /mnt/d/repository/ddr_configurator_develop; }
 
 sed_name() {
     if [ $# -eq 3 ]; then
         echo -e "Change Name ${GREEN}${1}${NC} to ${GREEN}${2}${NC} path: ${LYELLOW}${3}${NC}"
-        sed -i "s/${1}/${2}/g" ${3}
+        # Replace in a specific file
+        sed -i "s/${1}/${2}/g" "${3}"
     elif [ $# -eq 2 ]; then
         echo -e "Change Name ${GREEN}${1}${NC} to ${GREEN}${2}${NC}"
-        # exclude .git .svn directories
+        # Recursively replace in all files under current directory
+        # Exclude .git and .svn version control directories
+        # Exclude hidden files and directories (e.g. .env, .config/)
+        # -type f, Only process regular files
+        # -not -name '*.xxx' Skip common binary/media file types to avoid corruption
+
         find . \
           \( -path ./.git -o -path ./.svn \) -prune -o \
-          -type f -print0 | \
+          -not -path '*/.*' \
+          -type f \
+          -not -name '*.png' -not -name '*.jpg' \
+          -not -name '*.exe' -not -name '*.bin' \
+          -print0 | \
           xargs -0 -n 1 sed -i -e "s/${1}/${2}/g";
     else
         echo "Invalid input: sed_name {old} {new} ({file path})"
