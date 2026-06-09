@@ -36,6 +36,7 @@ sethandler <C-G> a:vim
 sethandler <C-H> a:ide
 sethandler <C-I> a:vim
 sethandler <C-O> a:vim
+sethandler <C-P> a:vim
 sethandler <C-R> a:vim
 sethandler <C-S> a:ide
 sethandler <C-T> a:vim
@@ -46,6 +47,9 @@ sethandler <C-Y> a:vim
 sethandler <A-[> a:vim
 sethandler <C-[> a:vim
 sethandler <C-]> a:vim
+
+" CtrlP-like file search and open
+map <C-p> <Action>(GotoFile)
 
 " map Alt-[ as ESC in insert & visual mode
 inoremap <A-[> <Esc>
